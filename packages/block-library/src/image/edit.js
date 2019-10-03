@@ -619,7 +619,7 @@ export class ImageEdit extends Component {
 							<IconButton
 								className={ classnames( 'components-icon-button components-toolbar__control', { 'is-active': this.state.isEditing } ) }
 								label={ __( 'Edit image' ) }
-								aria-pressed={ this.state.isEditing }
+								isToggled={ this.state.isEditing }
 								onClick={ this.toggleIsEditing }
 								icon={ editImageIcon }
 							/>
@@ -768,7 +768,7 @@ export class ImageEdit extends Component {
 													key={ scale }
 													isSmall
 													isPrimary={ isCurrent }
-													aria-pressed={ isCurrent }
+													isToggled={ isCurrent }
 													onClick={ this.updateDimensions( scaledWidth, scaledHeight ) }
 												>
 													{ scale }%
