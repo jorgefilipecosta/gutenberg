@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 7.1.0-rc.1 =
+
+C1
+Change 2
+
 = 7.0.0 =
 
 ### Features
