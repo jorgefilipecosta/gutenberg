@@ -521,7 +521,6 @@ function BlockListBlock( {
 			onMouseOverHandled={ hideHoverEffects }
 			onMouseLeave={ onMouseLeave }
 			onMouseDown={ onMouseDown }
-			onMouseUp={ onMouseUp }
 			className={ wrapperClassName }
 			data-type={ name }
 			data-block={ clientId }
