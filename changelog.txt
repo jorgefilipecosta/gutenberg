@@ -1,9 +1,10 @@
 == Changelog ==
 
-= 7.1.0-rc.1 =
+= 7.1.0 =
 
-C1
-Change 2
+CM1
+AAAAA
+DDDDD
 
 = 7.0.0 =
 
