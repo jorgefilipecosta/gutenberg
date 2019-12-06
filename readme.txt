@@ -79,6 +79,6 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 
 == Changelog ==
 
-CM1
-AAAAA
-DDDDD
+qqqqqq
+wwwwww
+eeeeee

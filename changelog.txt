@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 7.2.0-rc.1 =
+
+qqqqqq
+wwwwww
+eeeeee
+
 = 7.1.0 =
 
 CM1
