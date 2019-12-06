@@ -1,10 +1,9 @@
 == Changelog ==
 
-= 7.2.0-rc.1 =
+= 7.2.0 =
 
-qqqqqq
-wwwwww
-eeeeee
+qqqqqqq
+wwwwwww
 
 = 7.1.0 =
 
