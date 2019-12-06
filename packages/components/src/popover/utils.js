@@ -1,3 +1,7 @@
+/**
+ * WordPress dependencies
+ */
+import { getScrollContainer } from '@wordpress/dom';
 
 /**
  * Module constants
@@ -107,8 +111,31 @@ export function computePopoverXAxisPosition( anchorRect, contentSize, xAxis, cor
  *
  * @return {Object} Popover xAxis position and constraints.
  */
-export function computePopoverYAxisPosition( anchorRect, contentSize, yAxis, corner, forcePosition ) {
+export function computePopoverYAxisPosition( anchorRect, contentSize, yAxis, corner, forcePosition, sticky, anchorVerticalBuffer, anchorRef ) {
 	const { height } = contentSize;
+
+	if ( sticky ) {
+		let topEl = anchorRef;
+		let bottomEl = anchorRef;
+
+		if ( typeof sticky === 'string' ) {
+			const elements = document.querySelectorAll( sticky );
+			topEl = elements[ 0 ];
+			bottomEl = elements[ elements.length - 1 ];
+		}
+
+		const scrollContainerEl = getScrollContainer( topEl );
+		const scrollRect = scrollContainerEl.getBoundingClientRect();
+		const topRect = topEl.getBoundingClientRect();
+		const bottomRect = bottomEl.getBoundingClientRect();
+
+		if ( topRect.top - height - anchorVerticalBuffer <= scrollRect.top ) {
+			return {
+				yAxis,
+				popoverTop: Math.min( bottomRect.bottom, scrollRect.top + height ),
+			};
+		}
+	}
 
 	// y axis alignment choices
 	let anchorMidPoint = anchorRect.top + ( anchorRect.height / 2 );
@@ -181,10 +208,10 @@ export function computePopoverYAxisPosition( anchorRect, contentSize, yAxis, cor
  *
  * @return {Object} Popover position and constraints.
  */
-export function computePopoverPosition( anchorRect, contentSize, position = 'top', forcePosition ) {
+export function computePopoverPosition( anchorRect, contentSize, position = 'top', forcePosition, sticky, anchorVerticalBuffer, anchorRef ) {
 	const [ yAxis, xAxis = 'center', corner ] = position.split( ' ' );
 
-	const yAxisPosition = computePopoverYAxisPosition( anchorRect, contentSize, yAxis, corner, forcePosition );
+	const yAxisPosition = computePopoverYAxisPosition( anchorRect, contentSize, yAxis, corner, forcePosition, sticky, anchorVerticalBuffer, anchorRef );
 	const xAxisPosition = computePopoverXAxisPosition( anchorRect, contentSize, xAxis, corner, forcePosition, yAxisPosition.yAxis );
 
 	return {

@@ -560,6 +560,7 @@ function BlockListBlock( {
 					focusOnMount={ false }
 					anchorRef={ wrapper.current }
 					className="block-editor-block-list__block__popover"
+					sticky={ isPartOfMultiSelection ? '.wp-block.is-multi-selected' : true }
 				>
 					{ isFirstMultiSelected && (
 						<BlockMultiControls
@@ -578,6 +579,7 @@ function BlockListBlock( {
 					focusOnMount={ false }
 					anchorRef={ wrapper.current }
 					className="block-editor-block-list__block__popover"
+					sticky={ isPartOfMultiSelection ? '.wp-block.is-multi-selected' : true }
 				>
 					<BlockBreadcrumb
 						clientId={ clientId }
@@ -591,8 +593,11 @@ function BlockListBlock( {
 					position="top right left"
 					forcePosition
 					focusOnMount={ false }
+					anchorVerticalBuffer={ 13 }
+					anchorHorizontalBuffer={ 14 }
 					anchorRef={ wrapper.current }
 					className="block-editor-block-list__block__popover"
+					sticky={ isPartOfMultiSelection ? '.wp-block.is-multi-selected' : true }
 				>
 					<BlockContextualToolbar
 						// If the toolbar is being shown because of being forced

@@ -985,6 +985,10 @@
 	}
 }
 
+.components-popover.block-editor-block-list__block__popover {
+	z-index: 29;
+}
+
 .components-popover.block-editor-block-list__block__popover .components-popover__content {
 	min-width: auto;
 	background: none;
@@ -994,8 +998,7 @@
 }
 
 .components-popover.block-editor-block-list__block__popover[data-x-axis="right"] .components-popover__content {
-	margin-left: - $block-padding !important;
-	margin-bottom: $block-padding - 1 !important;
+	margin-left: 0 !important;
 }
 
 .block-editor-block-list__block__popover-with-shortcuts .components-popover__content {

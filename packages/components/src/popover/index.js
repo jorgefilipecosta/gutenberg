@@ -240,6 +240,7 @@ const Popover = ( {
 	animate = true,
 	onClickOutside,
 	onFocusOutside,
+	sticky,
 	/* eslint-enable no-unused-vars */
 	...contentProps
 } ) => {
@@ -298,7 +299,7 @@ const Popover = ( {
 				yAxis,
 				contentHeight,
 				contentWidth,
-			} = computePopoverPosition( anchor, contentRect.current, position, forcePosition );
+			} = computePopoverPosition( anchor, contentRect.current, position, forcePosition, sticky, anchorVerticalBuffer, anchorRef );
 
 			setClass( containerEl, 'is-without-arrow', noArrow || ( xAxis === 'center' && yAxis === 'middle' ) );
 			setAttribute( containerEl, 'data-x-axis', xAxis );
