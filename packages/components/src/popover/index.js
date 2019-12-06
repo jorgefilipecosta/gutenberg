@@ -21,8 +21,8 @@ import withConstrainedTabbing from '../higher-order/with-constrained-tabbing';
 import PopoverDetectOutside from './detect-outside';
 import IconButton from '../icon-button';
 import ScrollLock from '../scroll-lock';
-import IsolatedEventContainer from '../isolated-event-container';
 import { Slot, Fill, Consumer } from '../slot-fill';
+import IsolatedEventContainer from '../isolated-event-container';
 import Animate from '../animate';
 
 const FocusManaged = withConstrainedTabbing( withFocusReturn( ( { children } ) => children ) );
@@ -227,6 +227,7 @@ const Popover = ( {
 	// of props which aren't explicitly handled by this component.
 	/* eslint-disable no-unused-vars */
 	position = 'top',
+	forcePosition,
 	range,
 	focusOnMount = 'firstElement',
 	anchorRef,
@@ -297,7 +298,7 @@ const Popover = ( {
 				yAxis,
 				contentHeight,
 				contentWidth,
-			} = computePopoverPosition( anchor, contentRect.current, position );
+			} = computePopoverPosition( anchor, contentRect.current, position, forcePosition );
 
 			setClass( containerEl, 'is-without-arrow', noArrow || ( xAxis === 'center' && yAxis === 'middle' ) );
 			setAttribute( containerEl, 'data-x-axis', xAxis );
@@ -351,6 +352,7 @@ const Popover = ( {
 		anchorVerticalBuffer,
 		anchorHorizontalBuffer,
 		position,
+		forcePosition,
 	] );
 
 	useFocusContentOnMount( focusOnMount, contentRef );
@@ -468,6 +470,10 @@ const Popover = ( {
 				// default to an in-place rendering.
 				if ( getSlot && getSlot( SLOT_NAME ) ) {
 					content = <Fill name={ SLOT_NAME }>{ content }</Fill>;
+				}
+
+				if ( anchorRef ) {
+					return content;
 				}
 
 				return (

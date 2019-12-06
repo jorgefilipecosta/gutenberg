@@ -72,6 +72,15 @@ The direction in which the popover should open relative to its parent node. Spec
 - Required: No
 - Default: `"top center"`
 
+### forcePosition
+
+Normally the position may be adjusted based on available space. Set to `false`
+to disable this behaviour.
+
+- Type: `boolean`
+- Required: No
+- Default: `false`
+
 ### children
 
 The content to be displayed within the popover.
