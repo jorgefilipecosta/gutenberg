@@ -619,7 +619,7 @@ export class ImageEdit extends Component {
 							<IconButton
 								className="components-toolbar__control"
 								label={ __( 'Edit image' ) }
-								isToggled={ this.state.isEditing }
+								isPressed={ this.state.isEditing }
 								onClick={ this.toggleIsEditing }
 								icon={ editImageIcon }
 							/>
@@ -768,7 +768,7 @@ export class ImageEdit extends Component {
 													key={ scale }
 													isSmall
 													isPrimary={ isCurrent }
-													isToggled={ isCurrent }
+													isPressed={ isCurrent }
 													onClick={ this.updateDimensions( scaledWidth, scaledHeight ) }
 												>
 													{ scale }%
