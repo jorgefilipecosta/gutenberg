@@ -193,9 +193,11 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 					hasLoadedPostObject: _hasLoadedPostObject,
 					editorSettings: getEditorSettings(),
 					isReady: __unstableIsEditorReady(),
-					mode: getRenderingMode(),
+					mode: template ? getRenderingMode() : 'post-only',
 					defaultMode:
-						postTypeObject?.default_rendering_mode ?? 'post-only',
+						template && postTypeObject?.default_rendering_mode
+							? postTypeObject?.default_rendering_mode
+							: 'post-only',
 					selection: getEditorSelection(),
 					postTypeEntities:
 						post.type === 'wp_template'
@@ -203,7 +205,7 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 							: null,
 				};
 			},
-			[ post.type ]
+			[ template, post.type ]
 		);
 
 		const shouldRenderTemplate = !! template && mode !== 'post-only';
