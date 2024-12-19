@@ -195,7 +195,8 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 					editorSettings: getEditorSettings(),
 					isReady: __unstableIsEditorReady(),
 					mode: getRenderingMode(),
-					defaultMode: postTypeObject?.default_rendering_mode,
+					defaultMode:
+						postTypeObject?.default_rendering_mode ?? 'post-only',
 					selection: getEditorSelection(),
 					postTypeEntities:
 						post.type === 'wp_template'
@@ -334,11 +335,6 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 
 		// Register the editor commands.
 		useCommands();
-
-		console.log( {
-			notRender: ! isReady || ! mode || ! hasLoadedPostObject,
-			settings: ! settings.isPreviewMode,
-		} );
 
 		if ( ! isReady || ! mode || ! hasLoadedPostObject ) {
 			return null;
