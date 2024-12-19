@@ -400,6 +400,10 @@ function Layout( {
 				kind: 'postType',
 				name: 'wp_template',
 			} );
+			const canDiscoverTemplate = canUser( 'read', {
+				kind: 'root',
+				name: 'site',
+			} );
 			const { isZoomOut } = unlock( select( blockEditorStore ) );
 			const { getEditorMode, getRenderingMode } = select( editorStore );
 			const isRenderingPostOnly = getRenderingMode() === 'post-only';
@@ -421,6 +425,7 @@ function Layout( {
 					supportsTemplateMode &&
 					isViewable &&
 					canViewTemplate &&
+					canDiscoverTemplate &&
 					! isEditingTemplate
 						? getTemplateId( currentPostType, currentPostId )
 						: null,

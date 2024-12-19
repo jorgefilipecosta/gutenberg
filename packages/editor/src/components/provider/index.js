@@ -163,6 +163,7 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 		BlockEditorProviderComponent = ExperimentalBlockEditorProvider,
 		__unstableTemplate: template,
 	} ) => {
+		const hasTemplate = !! template;
 		const {
 			editorSettings,
 			selection,
@@ -193,11 +194,8 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 					hasLoadedPostObject: _hasLoadedPostObject,
 					editorSettings: getEditorSettings(),
 					isReady: __unstableIsEditorReady(),
-					mode: template ? getRenderingMode() : 'post-only',
-					defaultMode:
-						template && postTypeObject?.default_rendering_mode
-							? postTypeObject?.default_rendering_mode
-							: 'post-only',
+					mode: getRenderingMode(),
+					defaultMode: postTypeObject?.default_rendering_mode,
 					selection: getEditorSelection(),
 					postTypeEntities:
 						post.type === 'wp_template'
@@ -205,7 +203,7 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 							: null,
 				};
 			},
-			[ template, post.type ]
+			[ post.type ]
 		);
 
 		const shouldRenderTemplate = !! template && mode !== 'post-only';
@@ -329,13 +327,18 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 
 		// Sets the right rendering mode when loading the editor.
 		useEffect( () => {
-			setRenderingMode( defaultMode );
-		}, [ defaultMode, setRenderingMode ] );
+			setRenderingMode( hasTemplate ? defaultMode : 'post-only' );
+		}, [ hasTemplate, defaultMode, setRenderingMode ] );
 
 		useHideBlocksFromInserter( post.type, mode );
 
 		// Register the editor commands.
 		useCommands();
+
+		console.log( {
+			notRender: ! isReady || ! mode || ! hasLoadedPostObject,
+			settings: ! settings.isPreviewMode,
+		} );
 
 		if ( ! isReady || ! mode || ! hasLoadedPostObject ) {
 			return null;
